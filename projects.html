@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Projects by Kadava Swapna Chowdary including Campus Connect, Resume Analyzer, and Disease Prediction System.">
+  <meta name="keywords" content="projects, Campus Connect, Resume Analyzer, Disease Prediction System, portfolio, web development">
+  <meta name="author" content="Kadava Swapna Chowdary">
+  <meta property="og:title" content="Projects | Kadava Swapna Chowdary">
+  <meta property="og:description" content="Explore the projects created by Kadava Swapna Chowdary, including accessible experiences and intelligent systems.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="./projects.html">
+  <meta property="og:image" content="./images/projects-preview.png">
+  <title>Projects | Kadava Swapna Chowdary</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">KSC</a>
+      <button class="nav-toggle" aria-controls="primary-navigation" aria-expanded="false">Menu</button>
+      <nav class="primary-navigation" id="primary-navigation" role="navigation" aria-label="Primary">
+        <ul class="nav-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main id="main-content" class="site-main" role="main">
+    <section class="projects-hero section-hero" aria-labelledby="projects-heading">
+      <div class="container">
+        <div class="section-header">
+          <h1 id="projects-heading">Projects</h1>
+          <p>Explore a selection of my practical work across web development, analysis, and predictive systems.</p>
+        </div>
+      </div>
+    </section>
+    <section class="projects-list section-projects" aria-labelledby="projects-list-heading">
+      <div class="container">
+        <h2 id="projects-list-heading" class="visually-hidden">Project Cards</h2>
+        <div class="project-grid">
+          <article class="project-card" id="campus-connect">
+            <h3>Campus Connect</h3>
+            <p>A student collaboration platform for sharing resources, organizing events, and building campus networks.</p>
+            <p class="project-tech">Technologies: HTML, CSS, JavaScript, SQL</p>
+            <a class="button button-tertiary" href="contact.html">View Project</a>
+          </article>
+          <article class="project-card" id="resume-analyzer">
+            <h3>Resume Analyzer</h3>
+            <p>An intelligent tool that analyzes resumes and delivers suggestions for stronger candidate presentation.</p>
+            <p class="project-tech">Technologies: Python, JavaScript, HTML, CSS</p>
+            <a class="button button-tertiary" href="contact.html">View Project</a>
+          </article>
+          <article class="project-card" id="disease-prediction-system">
+            <h3>Disease Prediction System</h3>
+            <p>A data-driven application designed to predict health conditions and support early diagnostic decisions.</p>
+            <p class="project-tech">Technologies: Python, Java, SQL</p>
+            <a class="button button-tertiary" href="contact.html">View Project</a>
+          </article>
+        </div>
+      </div>
+    </section>
+    <aside class="project-aside section-certifications" aria-labelledby="certifications-heading">
+      <div class="container aside-card">
+        <h2 id="certifications-heading">Certifications</h2>
+        <div class="certification-grid">
+          <article class="cert-card">
+            <h3>Accessibility Focus</h3>
+            <p>Placeholder certification card for web accessibility skills.</p>
+          </article>
+          <article class="cert-card">
+            <h3>Responsive Design</h3>
+            <p>Placeholder certification card for responsive and semantic layout design.</p>
+          </article>
+          <article class="cert-card">
+            <h3>Technical Programming</h3>
+            <p>Placeholder certification card for programming skills in Python and Java.</p>
+          </article>
+        </div>
+      </div>
+    </aside>
+  </main>
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-inner">
+      <p>© 2026 Kadava Swapna Chowdary. All rights reserved.</p>
+      <nav aria-label="Footer">
+        <ul class="footer-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </footer>
+  <script>
+    const navToggle = document.querySelector('.nav-toggle');
+    const nav = document.querySelector('.primary-navigation');
+    navToggle.addEventListener('click', () => {
+      const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+      navToggle.setAttribute('aria-expanded', String(!expanded));
+      nav.classList.toggle('nav-open');
+    });
+  </script>
+</body>
+</html>

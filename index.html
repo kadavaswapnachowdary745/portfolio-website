@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio of Kadava Swapna Chowdary, a Computer Science Engineering student showcasing projects, skills, and contact information.">
+  <meta name="keywords" content="Kadava Swapna Chowdary, portfolio, Computer Science, HTML, CSS, JavaScript, Python, Java, SQL, projects">
+  <meta name="author" content="Kadava Swapna Chowdary">
+  <meta property="og:title" content="Kadava Swapna Chowdary | Portfolio">
+  <meta property="og:description" content="A modern portfolio for a Computer Science Engineering student showcasing skills, projects, and contact details.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="./index.html">
+  <meta property="og:image" content="./images/portfolio-preview.png">
+  <title>Kadava Swapna Chowdary | Portfolio</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">KSC</a>
+      <button class="nav-toggle" aria-controls="primary-navigation" aria-expanded="false">Menu</button>
+      <nav class="primary-navigation" id="primary-navigation" role="navigation" aria-label="Primary">
+        <ul class="nav-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main id="main-content" class="site-main" role="main">
+    <section class="hero section-hero" aria-labelledby="hero-heading">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Computer Science Engineering Student</p>
+          <h1 id="hero-heading">Hi, I’m <span>Kadava Swapna Chowdary</span></h1>
+          <p class="hero-text">I build accessible, modern web experiences using HTML, CSS, JavaScript, Python, Java, and SQL. Explore my projects, skills, and professional story.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="projects.html">View Projects</a>
+            <a class="button button-secondary" href="contact.html">Get in Touch</a>
+          </div>
+        </div>
+        <div class="hero-card" aria-label="Introduction card">
+          <div class="hero-card-content">
+            <h2>Core Strengths</h2>
+            <ul>
+              <li>Responsive interface design</li>
+              <li>Accessible web development</li>
+              <li>Data-driven logic and systems</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="skills-overview section-skills" aria-labelledby="skills-heading">
+      <div class="container">
+        <div class="section-header">
+          <h2 id="skills-heading">Skills Overview</h2>
+          <p>Technical skills built to solve real problems with clean code and strong usability.</p>
+        </div>
+        <div class="skills-grid">
+          <article class="skill-card">
+            <h3>Frontend</h3>
+            <p>HTML5, CSS3, JavaScript</p>
+          </article>
+          <article class="skill-card">
+            <h3>Programming</h3>
+            <p>Python, Java</p>
+          </article>
+          <article class="skill-card">
+            <h3>Data</h3>
+            <p>SQL, Data Structures</p>
+          </article>
+        </div>
+      </div>
+    </section>
+    <section class="featured-projects section-projects" aria-labelledby="featured-projects-heading">
+      <div class="container">
+        <div class="section-header">
+          <h2 id="featured-projects-heading">Featured Projects</h2>
+          <p>A selection of recent projects demonstrating practical application and technical growth.</p>
+        </div>
+        <div class="project-grid">
+          <article class="project-card">
+            <h3>Campus Connect</h3>
+            <p>A campus collaboration platform to connect students, share events, and post learning resources.</p>
+            <p class="project-tech">Technologies: HTML, CSS, JavaScript, SQL</p>
+            <a class="button button-tertiary" href="projects.html#campus-connect">View Project</a>
+          </article>
+          <article class="project-card">
+            <h3>Resume Analyzer</h3>
+            <p>An intelligent resume analysis tool that reviews skills and suggests improvements for recruiters.</p>
+            <p class="project-tech">Technologies: Python, HTML, CSS, JavaScript</p>
+            <a class="button button-tertiary" href="projects.html#resume-analyzer">View Project</a>
+          </article>
+          <article class="project-card">
+            <h3>Disease Prediction System</h3>
+            <p>A predictive system utilizing data models to detect health conditions and support early intervention.</p>
+            <p class="project-tech">Technologies: Python, Java, SQL</p>
+            <a class="button button-tertiary" href="projects.html#disease-prediction-system">View Project</a>
+          </article>
+        </div>
+      </div>
+    </section>
+    <section class="cta section-cta" aria-labelledby="cta-heading">
+      <div class="container cta-panel">
+        <h2 id="cta-heading">Ready to collaborate?</h2>
+        <p>Let’s build accessible digital solutions that showcase strong technical skills and thoughtful design.</p>
+        <a class="button button-primary" href="contact.html">Contact Me</a>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-inner">
+      <p>© 2026 Kadava Swapna Chowdary. All rights reserved.</p>
+      <nav aria-label="Footer">
+        <ul class="footer-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </footer>
+  <script>
+    const navToggle = document.querySelector('.nav-toggle');
+    const nav = document.querySelector('.primary-navigation');
+    navToggle.addEventListener('click', () => {
+      const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+      navToggle.setAttribute('aria-expanded', String(!expanded));
+      nav.classList.toggle('nav-open');
+    });
+  </script>
+</body>
+</html>

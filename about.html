@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Learn more about Kadava Swapna Chowdary, a Computer Science Engineering student with a focus on accessible web development and project delivery.">
+  <meta name="keywords" content="About Kadava Swapna Chowdary, Computer Science student, web developer, portfolio, education, skills">
+  <meta name="author" content="Kadava Swapna Chowdary">
+  <meta property="og:title" content="About | Kadava Swapna Chowdary">
+  <meta property="og:description" content="About page for Kadava Swapna Chowdary, outlining education, skills, and career objectives.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="./about.html">
+  <meta property="og:image" content="./images/about-preview.png">
+  <title>About | Kadava Swapna Chowdary</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">KSC</a>
+      <button class="nav-toggle" aria-controls="primary-navigation" aria-expanded="false">Menu</button>
+      <nav class="primary-navigation" id="primary-navigation" role="navigation" aria-label="Primary">
+        <ul class="nav-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main id="main-content" class="site-main" role="main">
+    <section class="about-intro section-about" aria-labelledby="about-heading">
+      <div class="container">
+        <div class="section-header">
+          <h1 id="about-heading">About Me</h1>
+          <p>Passionate Computer Science Engineering student at Anurag University focused on creating accessible web solutions and meaningful software experiences.</p>
+        </div>
+        <div class="about-grid">
+          <article class="about-copy">
+            <h2>Personal Introduction</h2>
+            <p>As a dedicated student and developer, I combine strong technical knowledge with user-first design principles. My work emphasizes clarity, accessibility, and responsive interaction.</p>
+            <h3>Career Objectives</h3>
+            <p>Seeking opportunities to contribute to web applications and data-driven systems, while growing expertise in frontend development and backend logic.</p>
+          </article>
+          <aside class="about-aside" aria-labelledby="education-heading">
+            <div class="card">
+              <h2 id="education-heading">Education</h2>
+              <p><strong>Anurag University</strong><br>Computer Science Engineering</p>
+              <p>Focus: Web development, programming languages, database systems.</p>
+            </div>
+            <div class="card certifications-card">
+              <h2>Certifications</h2>
+              <ul>
+                <li>Certified Web Accessibility Practitioner</li>
+                <li>Responsive Design Specialist</li>
+                <li>Data Structures & Algorithms</li>
+              </ul>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+    <section class="technical-skills section-skills" aria-labelledby="technical-skills-heading">
+      <div class="container">
+        <div class="section-header">
+          <h2 id="technical-skills-heading">Technical Skills</h2>
+          <p>Competencies across languages, tools, and development practices.</p>
+        </div>
+        <div class="skills-grid">
+          <article class="skill-card">
+            <h3>Languages</h3>
+            <p>HTML, CSS, JavaScript, Python, Java, SQL</p>
+          </article>
+          <article class="skill-card">
+            <h3>Design</h3>
+            <p>Responsive layout, semantic markup, accessibility</p>
+          </article>
+          <article class="skill-card">
+            <h3>Tools</h3>
+            <p>Code editors, version control, browser dev tools</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-inner">
+      <p>© 2026 Kadava Swapna Chowdary. All rights reserved.</p>
+      <nav aria-label="Footer">
+        <ul class="footer-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </footer>
+  <script>
+    const navToggle = document.querySelector('.nav-toggle');
+    const nav = document.querySelector('.primary-navigation');
+    navToggle.addEventListener('click', () => {
+      const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+      navToggle.setAttribute('aria-expanded', String(!expanded));
+      nav.classList.toggle('nav-open');
+    });
+  </script>
+</body>
+</html>
