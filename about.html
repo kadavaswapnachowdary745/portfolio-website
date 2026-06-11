@@ -15,18 +15,22 @@
   <title>About | Kadava Swapna Chowdary</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body data-theme="light">
   <a class="skip-link" href="#main-content">Skip to content</a>
   <header class="site-header" role="banner">
     <div class="container header-inner">
       <a href="index.html" class="brand">KSC</a>
-      <button class="nav-toggle" aria-controls="primary-navigation" aria-expanded="false">Menu</button>
+      <div class="header-actions">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle color theme" aria-pressed="false">Dark mode</button>
+        <button class="nav-toggle" aria-controls="primary-navigation" aria-expanded="false" aria-label="Open navigation menu">Menu</button>
+      </div>
       <nav class="primary-navigation" id="primary-navigation" role="navigation" aria-label="Primary">
         <ul class="nav-list">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="projects.html">Projects</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a class="nav-link" href="index.html">Home</a></li>
+          <li><a class="nav-link active" href="about.html">About</a></li>
+          <li><a class="nav-link" href="projects.html">Projects</a></li>
+          <li><a class="nav-link" href="certifications.html">Certifications</a></li>
+          <li><a class="nav-link" href="contact.html">Contact</a></li>
         </ul>
       </nav>
     </div>
@@ -94,6 +98,7 @@
           <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="projects.html">Projects</a></li>
+          <li><a href="certifications.html">Certifications</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
@@ -102,6 +107,28 @@
   <script>
     const navToggle = document.querySelector('.nav-toggle');
     const nav = document.querySelector('.primary-navigation');
+    const themeToggle = document.querySelector('#theme-toggle');
+
+    const savedTheme = localStorage.getItem('portfolio-theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+
+    document.body.dataset.theme = initialTheme;
+    updateThemeButton(initialTheme);
+
+    function updateThemeButton(theme) {
+      themeToggle.textContent = theme === 'dark' ? 'Light mode' : 'Dark mode';
+      themeToggle.setAttribute('aria-pressed', theme === 'dark');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = document.body.dataset.theme === 'dark' ? 'dark' : 'light';
+      const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.body.dataset.theme = nextTheme;
+      localStorage.setItem('portfolio-theme', nextTheme);
+      updateThemeButton(nextTheme);
+    });
+
     navToggle.addEventListener('click', () => {
       const expanded = navToggle.getAttribute('aria-expanded') === 'true';
       navToggle.setAttribute('aria-expanded', String(!expanded));
