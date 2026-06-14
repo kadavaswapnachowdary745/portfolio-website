@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TaskFlow - A modern, glassmorphic task management application built with vanilla JavaScript. Manage your daily operations, track progress, and boost productivity.">
+  <meta name="keywords" content="task manager, todo app, productivity, glassmorphic UI, javascript, localstorage">
+  <meta name="author" content="Kadava Swapna Chowdary">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="TaskFlow | Premium Task Management">
+  <meta property="og:description" content="A premium task management application featuring a glassmorphism design, real-time statistics, search, filtering, and offline persistence.">
+  <meta property="og:type" content="website">
+  
+  <title>TaskFlow | Premium Task Management</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- CSS Link -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-theme="dark">
+  <!-- Skip to main content link for screen readers -->
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <!-- Animated Background Shapes -->
+  <div class="background-decorations" aria-hidden="true">
+    <div class="bubble bubble-1"></div>
+    <div class="bubble bubble-2"></div>
+    <div class="bubble bubble-3"></div>
+  </div>
+
+  <div class="app-wrapper">
+    <!-- Header -->
+    <header class="app-header" role="banner">
+      <div class="header-logo">
+        <svg class="logo-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
+          <path d="m9 12 2 2 4-4"/>
+        </svg>
+        <h1>Task<span>Flow</span></h1>
+      </div>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light or dark theme" aria-pressed="false">
+        <svg class="theme-icon sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+        </svg>
+        <svg class="theme-icon moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
+        </svg>
+        <span class="theme-toggle-text">Light Mode</span>
+      </button>
+    </header>
+
+    <main id="main-content" class="app-main" role="main">
+      <!-- Statistics Dashboard -->
+      <section class="stats-dashboard glass-panel" aria-labelledby="stats-heading">
+        <h2 id="stats-heading" class="sr-only">Task Statistics</h2>
+        <div class="stats-grid">
+          <div class="stat-card" id="stat-total-card">
+            <span class="stat-label">Total Tasks</span>
+            <span class="stat-number" id="stat-total">0</span>
+          </div>
+          <div class="stat-card" id="stat-active-card">
+            <span class="stat-label">Active</span>
+            <span class="stat-number" id="stat-active">0</span>
+          </div>
+          <div class="stat-card" id="stat-completed-card">
+            <span class="stat-label">Completed</span>
+            <span class="stat-number" id="stat-completed">0</span>
+          </div>
+          <div class="stat-card" id="stat-overdue-card">
+            <span class="stat-label">Overdue</span>
+            <span class="stat-number" id="stat-overdue">0</span>
+          </div>
+        </div>
+        <div class="progress-container">
+          <div class="progress-header">
+            <span>Completion Rate</span>
+            <span id="progress-percentage" aria-live="polite">0%</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Task completion progress"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Task Operations Panel -->
+      <div class="operations-panel glass-panel">
+        <!-- Search & Filter Controls -->
+        <section class="controls-section" aria-label="Search and filter tasks">
+          <div class="search-wrapper">
+            <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="8"/>
+              <path d="m21 21-4.3-4.3"/>
+            </svg>
+            <input type="search" id="task-search" placeholder="Search tasks..." aria-label="Search by task title" autocomplete="off">
+            <button id="clear-search-btn" class="clear-search-btn hidden" aria-label="Clear search query">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 6 6 18M6 6l12 12"/>
+              </svg>
+            </button>
+          </div>
+
+          <div class="filter-actions-row">
+            <nav class="filter-tabs" aria-label="Filter tasks" role="tablist">
+              <button class="filter-tab active" id="filter-all" role="tab" aria-selected="true" aria-controls="task-list" data-filter="all">All</button>
+              <button class="filter-tab" id="filter-active" role="tab" aria-selected="false" aria-controls="task-list" data-filter="active">Active</button>
+              <button class="filter-tab" id="filter-completed" role="tab" aria-selected="false" aria-controls="task-list" data-filter="completed">Completed</button>
+            </nav>
+
+            <div class="sort-wrapper">
+              <label for="task-sort" class="sr-only">Sort Tasks</label>
+              <select id="task-sort" class="sort-select" aria-label="Sort tasks">
+                <option value="created-desc">Newest First</option>
+                <option value="created-asc">Oldest First</option>
+                <option value="due-asc">Due Date (Soonest)</option>
+                <option value="due-desc">Due Date (Latest)</option>
+              </select>
+            </div>
+            
+            <button class="btn btn-secondary clear-completed-btn" id="clear-completed-btn" aria-label="Clear all completed tasks" disabled>
+              Clear Completed
+            </button>
+          </div>
+        </section>
+
+        <!-- Task Form -->
+        <section class="form-section" aria-labelledby="form-heading">
+          <h2 id="form-heading" class="sr-only">Create New Task</h2>
+          <form id="task-form" class="task-form" novalidate>
+            <div class="form-inputs">
+              <div class="input-group input-title-group">
+                <label for="task-input" class="sr-only">Task Title</label>
+                <input type="text" id="task-input" class="task-input" placeholder="What needs to be done?" required aria-required="true" maxlength="120">
+                <div class="char-counter" id="char-counter" aria-live="polite">0 / 120</div>
+              </div>
+              <div class="input-group input-date-group">
+                <label for="task-due-date-input" class="sr-only">Due Date</label>
+                <div class="date-input-wrapper">
+                  <input type="date" id="task-due-date-input" class="task-due-date-input" aria-label="Optional due date">
+                  <span class="date-placeholder">Due Date (Optional)</span>
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary add-task-btn" aria-label="Add new task">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h14M12 5v14"/>
+              </svg>
+              <span>Add Task</span>
+            </button>
+          </form>
+        </section>
+
+        <!-- Tasks List -->
+        <section class="list-section" aria-label="Task list container">
+          <ul id="task-list" class="task-list" role="tabpanel" aria-labelledby="filter-all">
+            <!-- Dynamic elements will be inserted here -->
+          </ul>
+
+          <!-- Empty State -->
+          <div id="empty-state" class="empty-state hidden" aria-hidden="true">
+            <svg class="empty-illustration" width="180" height="180" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="100" cy="100" r="80" fill="url(#grad-bg)" opacity="0.15"/>
+              <rect x="60" y="50" width="80" height="100" rx="8" fill="url(#grad-card)" stroke="url(#grad-border)" stroke-width="2" opacity="0.8"/>
+              <line x1="75" y1="80" x2="125" y2="80" stroke="currentColor" stroke-width="3" stroke-linecap="round" opacity="0.4"/>
+              <line x1="75" y1="100" x2="115" y2="100" stroke="currentColor" stroke-width="3" stroke-linecap="round" opacity="0.4"/>
+              <line x1="75" y1="120" x2="105" y2="120" stroke="currentColor" stroke-width="3" stroke-linecap="round" opacity="0.4"/>
+              <!-- Checkmark circle -->
+              <circle cx="140" cy="130" r="22" fill="currentColor" opacity="0.2"/>
+              <circle cx="140" cy="130" r="22" stroke="currentColor" stroke-width="2"/>
+              <path d="M132 130L137 135L148 124" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              <defs>
+                <linearGradient id="grad-bg" x1="20" y1="20" x2="180" y2="180" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="var(--accent-color)"/>
+                  <stop offset="1" stop-color="var(--secondary-color)"/>
+                </linearGradient>
+                <linearGradient id="grad-card" x1="60" y1="50" x2="140" y2="150" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="rgba(255,255,255,0.1)"/>
+                  <stop offset="1" stop-color="rgba(255,255,255,0.02)"/>
+                </linearGradient>
+                <linearGradient id="grad-border" x1="60" y1="50" x2="140" y2="150" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="rgba(255,255,255,0.2)"/>
+                  <stop offset="1" stop-color="rgba(255,255,255,0.05)"/>
+                </linearGradient>
+              </defs>
+            </svg>
+            <h3>No tasks found</h3>
+            <p>Get started by adding a task or adjusting your filter settings!</p>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer" role="contentinfo">
+      <p>TaskFlow &copy; 2026. Made with &hearts; for internship logic evaluation.</p>
+    </footer>
+  </div>
+
+  <!-- Custom Confirmation Dialog (Modal) -->
+  <div class="modal-backdrop hidden" id="modal-backdrop" role="none">
+    <div class="modal-dialog glass-panel" id="delete-confirm-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-desc" tabindex="-1">
+      <div class="modal-header">
+        <svg class="warning-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/>
+          <line x1="12" y1="9" x2="12" y2="13"/>
+          <line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+        <h3 id="modal-title">Delete Task</h3>
+      </div>
+      <div class="modal-body">
+        <p id="modal-desc">Are you sure you want to delete this task? This action cannot be undone.</p>
+        <div class="modal-task-preview" id="modal-task-preview" aria-label="Task to delete">
+          <!-- Text loaded dynamically -->
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-secondary" id="confirm-cancel-btn">Cancel</button>
+        <button type="button" class="btn btn-danger" id="confirm-delete-btn">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container" aria-live="polite" role="status"></div>
+
+  <!-- JS Link -->
+  <script src="js/app.js"></script>
+</body>
+</html>
