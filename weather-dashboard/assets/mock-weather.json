@@ -1,0 +1,160 @@
+{
+  "hyderabad": {
+    "coord": {
+      "lon": 78.4867,
+      "lat": 17.385
+    },
+    "weather": [
+      {
+        "id": 800,
+        "main": "Clear",
+        "description": "clear sky",
+        "icon": "01d"
+      }
+    ],
+    "main": {
+      "temp": 34.2,
+      "feels_like": 36.5,
+      "temp_min": 33.0,
+      "temp_max": 35.0,
+      "pressure": 1008,
+      "humidity": 45,
+      "grnd_level": 950
+    },
+    "visibility": 8000,
+    "wind": {
+      "speed": 3.6,
+      "deg": 220
+    },
+    "clouds": {
+      "all": 5
+    },
+    "dt": 1718373600,
+    "sys": {
+      "country": "IN",
+      "sunrise": 1718323800,
+      "sunset": 1718371200
+    },
+    "timezone": 19800,
+    "name": "Hyderabad",
+    "cod": 200
+  },
+  "mumbai": {
+    "coord": {
+      "lon": 72.8777,
+      "lat": 19.076
+    },
+    "weather": [
+      {
+        "id": 501,
+        "main": "Rain",
+        "description": "moderate rain",
+        "icon": "10d"
+      }
+    ],
+    "main": {
+      "temp": 28.5,
+      "feels_like": 32.8,
+      "temp_min": 27.5,
+      "temp_max": 29.5,
+      "pressure": 1005,
+      "humidity": 88,
+      "sea_level": 1005
+    },
+    "visibility": 5000,
+    "wind": {
+      "speed": 6.2,
+      "deg": 250
+    },
+    "clouds": {
+      "all": 90
+    },
+    "dt": 1718373600,
+    "sys": {
+      "country": "IN",
+      "sunrise": 1718324800,
+      "sunset": 1718372600
+    },
+    "timezone": 19800,
+    "name": "Mumbai",
+    "cod": 200
+  },
+  "london": {
+    "coord": {
+      "lon": -0.1278,
+      "lat": 51.5074
+    },
+    "weather": [
+      {
+        "id": 803,
+        "main": "Clouds",
+        "description": "broken clouds",
+        "icon": "04d"
+      }
+    ],
+    "main": {
+      "temp": 16.8,
+      "feels_like": 16.2,
+      "temp_min": 15.0,
+      "temp_max": 18.0,
+      "pressure": 1015,
+      "humidity": 72
+    },
+    "visibility": 10000,
+    "wind": {
+      "speed": 4.6,
+      "deg": 210
+    },
+    "clouds": {
+      "all": 75
+    },
+    "dt": 1718373600,
+    "sys": {
+      "country": "GB",
+      "sunrise": 1718336400,
+      "sunset": 1718396400
+    },
+    "timezone": 3600,
+    "name": "London",
+    "cod": 200
+  },
+  "new york": {
+    "coord": {
+      "lon": -74.006,
+      "lat": 40.7128
+    },
+    "weather": [
+      {
+        "id": 211,
+        "main": "Thunderstorm",
+        "description": "thunderstorm with light rain",
+        "icon": "11d"
+      }
+    ],
+    "main": {
+      "temp": 22.4,
+      "feels_like": 22.8,
+      "temp_min": 21.0,
+      "temp_max": 24.0,
+      "pressure": 1009,
+      "humidity": 82
+    },
+    "visibility": 9000,
+    "wind": {
+      "speed": 5.8,
+      "deg": 180
+    },
+    "clouds": {
+      "all": 80
+    },
+    "dt": 1718373600,
+    "sys": {
+      "country": "US",
+      "sunrise": 1718357400,
+      "sunset": 1718411400
+    },
+    "timezone": -14400,
+    "name": "New York",
+    "cod": 200
+  }
+}

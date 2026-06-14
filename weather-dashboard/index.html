@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aetheria Weather | Professional Meteorological Dashboard</title>
+  <meta name="description" content="Experience real-time weather analytics, high-fidelity visualization, and predictive meteorological telemetry. Built with clean, accessible, modern web technologies.">
+  
+  <!-- Premium Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/lucide/dist/umd/lucide.min.js"></script>
+</head>
+<body class="theme-dark">
+  <!-- Dynamic Gradient Background Overlay -->
+  <div class="dynamic-bg" aria-hidden="true"></div>
+  
+  <!-- Main Grid Layout Container -->
+  <div class="dashboard-container">
+    
+    <!-- HEADER BAR -->
+    <header class="dashboard-header glass-panel" role="banner">
+      <div class="brand-group">
+        <div class="brand-logo" aria-hidden="true">
+          <i data-lucide="cloud-lightning" class="brand-icon"></i>
+        </div>
+        <div>
+          <h1 class="brand-title">Aetheria <span class="gradient-text">Weather</span></h1>
+          <p class="brand-subtitle">Meteorological Dashboard</p>
+        </div>
+      </div>
+      
+      <!-- Date-Time and Action Panel -->
+      <div class="header-actions">
+        <div class="time-widget glass-pill" id="time-widget" aria-live="polite">
+          <i data-lucide="calendar" class="widget-icon"></i>
+          <span id="current-date-time">Sunday, June 14, 19:29</span>
+        </div>
+        
+        <button id="theme-toggle" class="icon-btn glass-pill" aria-label="Toggle light and dark mode" title="Toggle theme">
+          <i data-lucide="sun" class="sun-icon"></i>
+          <i data-lucide="moon" class="moon-icon"></i>
+        </button>
+        
+        <button id="settings-toggle" class="icon-btn glass-pill" aria-label="Configure Weather API Keys" title="API Settings">
+          <i data-lucide="settings"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- CONTENT LAYOUT -->
+    <main class="dashboard-main" role="main">
+      
+      <!-- LEFT COLUMN: Search & Recent Searches -->
+      <aside class="control-panel flex-column" aria-label="Search controls">
+        <!-- SEARCH SECTION -->
+        <section class="glass-panel search-card" aria-labelledby="search-heading">
+          <h2 id="search-heading" class="sr-only">Search City</h2>
+          <form id="search-form" class="search-form" novalidate>
+            <div class="input-wrapper">
+              <i data-lucide="search" class="search-input-icon" aria-hidden="true"></i>
+              <input 
+                type="text" 
+                id="city-input" 
+                placeholder="Enter city name..." 
+                autocomplete="off" 
+                aria-required="true"
+                aria-label="Enter city name for weather info"
+                required
+              >
+              <button type="button" id="clear-search" class="clear-btn hidden" aria-label="Clear input text">
+                <i data-lucide="x"></i>
+              </button>
+            </div>
+            <button type="submit" id="search-submit" class="primary-btn" aria-label="Search weather for city">
+              <span>Search</span>
+              <i data-lucide="arrow-right"></i>
+            </button>
+          </form>
+        </section>
+
+        <!-- RECENT SEARCHES -->
+        <section class="glass-panel recent-searches-card flex-grow" aria-labelledby="recent-heading">
+          <div class="section-header">
+            <h2 id="recent-heading" class="section-title">
+              <i data-lucide="history" class="header-icon"></i>
+              <span>Recent Searches</span>
+            </h2>
+            <button id="clear-history" class="text-btn text-danger hidden" aria-label="Clear all recent search history">
+              Clear All
+            </button>
+          </div>
+          
+          <div class="recent-list-container">
+            <ul class="recent-list" id="recent-list" role="list">
+              <!-- Dynamically populated, fallback empty state below -->
+              <li class="empty-list-msg" id="empty-history-msg">No recent searches. Search a city to begin.</li>
+            </ul>
+          </div>
+        </section>
+      </aside>
+
+      <!-- RIGHT COLUMN: Weather Display Area -->
+      <div class="weather-display-area flex-column">
+        
+        <!-- API CONFIG ALERT (Visible if using Mock mode) -->
+        <div id="api-status-banner" class="status-banner info glass-panel" role="status">
+          <div class="banner-content">
+            <i data-lucide="info" class="banner-icon"></i>
+            <span class="banner-text">Running in <strong>Mock Mode</strong>. Search "London", "Hyderabad", "Mumbai", or "New York" for mock data. Open settings <i data-lucide="settings" class="inline-icon"></i> to enable the live keyless Open-Meteo API.</span>
+          </div>
+        </div>
+
+        <!-- ERROR NOTIFICATIONS -->
+        <div id="error-card" class="status-banner error glass-panel hidden" role="alert" aria-live="assertive">
+          <div class="banner-content">
+            <i data-lucide="alert-triangle" class="banner-icon"></i>
+            <span id="error-message" class="banner-text">An error has occurred. Please try again.</span>
+          </div>
+          <button id="close-error" class="close-banner-btn" aria-label="Close error message">
+            <i data-lucide="x"></i>
+          </button>
+        </div>
+
+        <!-- LOADING STATE -->
+        <div id="loading-card" class="glass-panel loading-card flex-grow hidden" role="status" aria-live="polite">
+          <div class="spinner-container">
+            <div class="loader-ring"></div>
+            <p id="loading-message" class="loading-text">Fetching latest atmospheric data...</p>
+          </div>
+        </div>
+
+        <!-- WELCOME SCREEN (Shown when no search has occurred yet) -->
+        <div id="welcome-card" class="glass-panel welcome-card flex-grow">
+          <div class="welcome-content">
+            <div class="welcome-illustration">
+              <i data-lucide="cloud-sun" class="welcome-icon animate-float"></i>
+            </div>
+            <h2 class="welcome-title">Welcome to Aetheria Weather</h2>
+            <p class="welcome-desc">Explore professional real-time meteorological reports, humidity sensors, barometric tracking, and wind vectors around the globe.</p>
+            <div class="welcome-buttons">
+              <button class="welcome-quick-city glass-pill" data-city="Hyderabad">Hyderabad</button>
+              <button class="welcome-quick-city glass-pill" data-city="Mumbai">Mumbai</button>
+              <button class="welcome-quick-city glass-pill" data-city="London">London</button>
+              <button class="welcome-quick-city glass-pill" data-city="New York">New York</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- WEATHER CONTENT SECTION (Populated dynamically) -->
+        <div id="weather-content" class="weather-content-wrapper flex-column flex-grow hidden">
+          <!-- MAIN CARD -->
+          <article class="glass-panel main-weather-card" id="main-weather-card">
+            <div class="main-card-header">
+              <div class="location-box">
+                <div class="location-name-row">
+                  <i data-lucide="map-pin" class="pin-icon" aria-hidden="true"></i>
+                  <h2 id="weather-city" class="city-name">London</h2>
+                  <span id="weather-country" class="country-badge">GB</span>
+                </div>
+                <p id="weather-local-time" class="local-time-stamp">Local Time: 15:02</p>
+              </div>
+              <button id="refresh-weather" class="refresh-btn glass-pill" aria-label="Refresh current weather details">
+                <i data-lucide="refresh-cw" class="refresh-icon"></i>
+                <span>Refresh</span>
+              </button>
+            </div>
+
+            <div class="main-card-body">
+              <div class="temp-condition-box">
+                <span id="weather-temp" class="temperature-display">16.8</span>
+                <span class="temp-unit">°C</span>
+                <div class="condition-badge-wrapper">
+                  <p id="weather-desc" class="weather-description">broken clouds</p>
+                  <p id="weather-main" class="weather-main-status">Clouds</p>
+                </div>
+              </div>
+
+              <!-- Main Visual Representation -->
+              <div class="weather-visual-box">
+                <div id="weather-icon-wrapper" class="weather-icon-frame">
+                  <!-- Fallback custom SVG / PNG generated on client side -->
+                  <img id="weather-icon" src="" alt="Weather condition icon" class="weather-icon-img">
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- DETAILED TELEMETRY GRID -->
+          <section class="telemetry-grid" aria-label="Detailed meteorological metrics">
+            <h3 class="sr-only">Detailed weather elements</h3>
+            
+            <!-- Feels Like -->
+            <div class="glass-panel telemetry-card">
+              <div class="card-icon-header text-primary">
+                <i data-lucide="thermometer"></i>
+              </div>
+              <div class="card-metric-info">
+                <h4 class="metric-title">Feels Like</h4>
+                <p class="metric-value"><span id="weather-feels-like">16.2</span><span class="unit">°C</span></p>
+                <p class="metric-subtitle">Apparent temperature</p>
+              </div>
+            </div>
+
+            <!-- Humidity -->
+            <div class="glass-panel telemetry-card">
+              <div class="card-icon-header text-info">
+                <i data-lucide="droplets"></i>
+              </div>
+              <div class="card-metric-info">
+                <h4 class="metric-title">Humidity</h4>
+                <p class="metric-value"><span id="weather-humidity">72</span><span class="unit">%</span></p>
+                <p class="metric-subtitle">Atmospheric moisture</p>
+              </div>
+            </div>
+
+            <!-- Wind Speed -->
+            <div class="glass-panel telemetry-card">
+              <div class="card-icon-header text-success">
+                <i data-lucide="wind"></i>
+              </div>
+              <div class="card-metric-info">
+                <h4 class="metric-title">Wind Speed</h4>
+                <p class="metric-value"><span id="weather-wind">4.6</span><span class="unit">m/s</span></p>
+                <p class="metric-subtitle" id="wind-desc">Gentle breeze</p>
+              </div>
+            </div>
+
+            <!-- Barometric Pressure -->
+            <div class="glass-panel telemetry-card">
+              <div class="card-icon-header text-warning">
+                <i data-lucide="gauge"></i>
+              </div>
+              <div class="card-metric-info">
+                <h4 class="metric-title">Barometer</h4>
+                <p class="metric-value"><span id="weather-pressure">1015</span><span class="unit">hPa</span></p>
+                <p class="metric-subtitle" id="pressure-desc">Standard pressure</p>
+              </div>
+            </div>
+
+            <!-- Visibility -->
+            <div class="glass-panel telemetry-card full-width-tablet">
+              <div class="card-icon-header text-accent">
+                <i data-lucide="eye"></i>
+              </div>
+              <div class="card-metric-info">
+                <h4 class="metric-title">Visibility</h4>
+                <p class="metric-value"><span id="weather-visibility">10.0</span><span class="unit">km</span></p>
+                <p class="metric-subtitle" id="visibility-desc">Clear vision</p>
+              </div>
+            </div>
+          </section>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="dashboard-footer glass-panel" role="contentinfo">
+      <p class="footer-copy">&copy; 2026 Aetheria Systems. Developed as a professional portfolio submission.</p>
+      <div class="footer-accessibility-badges">
+        <span class="badge a11y-badge" title="Accessible via Screen Reader and Keyboard"><i data-lucide="accessibility" class="badge-icon"></i> WCAG compliant</span>
+        <span class="badge status-badge" id="api-status-badge"><i data-lucide="database" class="badge-icon"></i> Mock Mode</span>
+      </div>
+    </footer>
+  </div>
+
+  <!-- SETTINGS MODAL (API Configuration) -->
+  <dialog id="settings-dialog" class="settings-dialog glass-panel" aria-labelledby="modal-title" aria-modal="true">
+    <div class="modal-header">
+      <h3 id="modal-title" class="modal-title">
+        <i data-lucide="settings" class="header-icon"></i>
+        <span>Dashboard Settings</span>
+      </h3>
+      <button id="close-settings" class="close-modal-btn" aria-label="Close settings window">
+        <i data-lucide="x"></i>
+      </button>
+    </div>
+    
+    <form id="settings-form" class="modal-body" method="dialog">
+      <div class="form-group">
+        <label for="api-mode-select" class="form-label">Data Provider Mode</label>
+        <select id="api-mode-select" class="form-select">
+          <option value="mock">Offline Mock Data (Immediate Demonstration)</option>
+          <option value="openmeteo">Open-Meteo Live API (Free & Keyless)</option>
+        </select>
+        <p class="form-tip">Mock Mode fetches pre-seeded, rich meteorological profiles locally. Open-Meteo Live API fetches real-time worldwide data without requiring any key or registration.</p>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" id="reset-settings" class="text-btn">Reset Defaults</button>
+        <button type="submit" id="save-settings" class="primary-btn">Save Changes</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Core Javascript -->
+  <script src="js/app.js"></script>
+</body>
+</html>
